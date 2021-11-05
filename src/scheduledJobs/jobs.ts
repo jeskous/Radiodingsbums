@@ -17,7 +17,7 @@ export const Jobs = {
   },
 
   njoy: () => {
-    schedule.scheduleJob("*/5 * * * * *", async () => {
+    schedule.scheduleJob("* */2 * * * *", async () => {
       const song = await getNjoySong();
       await createNewSong(lsNJOY, song);
       lsNJOY = song.title;

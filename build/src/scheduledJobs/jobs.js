@@ -29,7 +29,7 @@ exports.Jobs = {
         }));
     }),
     njoy: () => {
-        node_schedule_1.default.scheduleJob("*/5 * * * * *", () => __awaiter(void 0, void 0, void 0, function* () {
+        node_schedule_1.default.scheduleJob("* */2 * * * *", () => __awaiter(void 0, void 0, void 0, function* () {
             const song = yield (0, NjoyScraper_1.getNjoySong)();
             yield (0, create_1.createNewSong)(lsNJOY, song);
             lsNJOY = song.title;
