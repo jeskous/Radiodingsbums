@@ -5,7 +5,9 @@ const url: string = "https://www.ndr.de/ndr2/index.html";
 
 export async function getNdr2Song() {
   console.log("launcing browser...");
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
   console.log("opening new Page...");
   const page = await browser.newPage();
   console.log("going to url...");

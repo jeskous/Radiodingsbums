@@ -6,7 +6,9 @@ const url: string = "https://www.n-joy.de/";
 
 export async function getNjoySong() {
   console.log("launcing browser...");
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
   console.log("opening new Page (njoy)...");
   const page = await browser.newPage();
   console.log("going to url...");

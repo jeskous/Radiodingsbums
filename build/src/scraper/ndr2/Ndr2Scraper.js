@@ -18,7 +18,9 @@ const url = "https://www.ndr.de/ndr2/index.html";
 function getNdr2Song() {
     return __awaiter(this, void 0, void 0, function* () {
         console.log("launcing browser...");
-        const browser = yield puppeteer_1.default.launch();
+        const browser = yield puppeteer_1.default.launch({
+            args: ["--no-sandbox", "--disable-setuid-sandbox"],
+        });
         console.log("opening new Page...");
         const page = yield browser.newPage();
         console.log("going to url...");

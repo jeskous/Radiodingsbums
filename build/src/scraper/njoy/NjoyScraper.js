@@ -19,7 +19,9 @@ const url = "https://www.n-joy.de/";
 function getNjoySong() {
     return __awaiter(this, void 0, void 0, function* () {
         console.log("launcing browser...");
-        const browser = yield puppeteer_1.default.launch();
+        const browser = yield puppeteer_1.default.launch({
+            args: ["--no-sandbox", "--disable-setuid-sandbox"],
+        });
         console.log("opening new Page (njoy)...");
         const page = yield browser.newPage();
         console.log("going to url...");
