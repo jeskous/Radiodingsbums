@@ -9,7 +9,6 @@ export async function createNewSong(lastSong: string, song: CurrentSong) {
         interpret: song.interpret,
         title: song.title,
         channel: song.channel,
-        createdAt: new Date().toLocaleString(),
       },
     });
   }
