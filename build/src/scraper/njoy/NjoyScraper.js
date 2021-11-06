@@ -18,29 +18,35 @@ const NjoyUtils_1 = require("./NjoyUtils");
 const url = "https://www.n-joy.de/";
 function getNjoySong() {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log("launcing browser...");
-        const browser = yield puppeteer_1.default.launch({
-            args: ["--no-sandbox", "--disable-setuid-sandbox"],
-        });
-        console.log("opening new Page (njoy)...");
-        const page = yield browser.newPage();
-        console.log("going to url...");
-        yield page.goto(url);
-        console.log("getting element...");
-        const [SongString] = yield page.$x("/html/body/div[3]/div/div[1]/div[3]/div[1]/div[1]/div/div/p/span");
-        const innerHTML = yield SongString.getProperty("innerHTML");
-        const SongStringValue = yield innerHTML.jsonValue();
-        console.log("splitting title and interpret from songstring...");
-        const [interpret, title] = (0, NjoyUtils_1.formatSongString)(SongStringValue);
-        console.log("creating object...");
-        const song = {
-            title: title,
-            interpret: interpret,
-            channel: "N-JOY",
-        };
-        console.log("returning new Song!");
-        console.log(song);
-        return song;
+        try {
+            console.log("launcing browser...");
+            const browser = yield puppeteer_1.default.launch({
+                args: ["--no-sandbox", "--disable-setuid-sandbox"],
+            });
+            console.log("opening new Page (njoy)...");
+            const page = yield browser.newPage();
+            console.log("going to url...");
+            yield page.goto(url);
+            console.log("getting element...");
+            const [SongString] = yield page.$x("/html/body/div[3]/div/div[1]/div[3]/div[1]/div[1]/div/div/p/span");
+            const innerHTML = yield SongString.getProperty("innerHTML");
+            const SongStringValue = yield innerHTML.jsonValue();
+            console.log("splitting title and interpret from songstring...");
+            const [interpret, title] = (0, NjoyUtils_1.formatSongString)(SongStringValue);
+            console.log("creating object...");
+            const song = {
+                title: title,
+                interpret: interpret,
+                channel: "N-JOY",
+            };
+            console.log("returning new Song!");
+            console.log(song);
+            return song;
+        }
+        catch (err) {
+            console.log("getNjoySong - ERROR");
+            console.log(err);
+        }
     });
 }
 exports.getNjoySong = getNjoySong;

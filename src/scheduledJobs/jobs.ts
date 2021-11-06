@@ -1,5 +1,6 @@
 import schedule from "node-schedule";
 import { createNewSong } from "../database/create";
+import CurrentSong from "../interfaces/CurrentSong";
 import { getNdr2Song } from "../scraper/ndr2/Ndr2Scraper";
 import { getNjoySong } from "../scraper/njoy/NjoyScraper";
 
@@ -11,16 +12,20 @@ export const Jobs = {
   ndr2: async () => {
     schedule.scheduleJob("*/30 */1 * * * *", async () => {
       const song = await getNdr2Song();
-      await createNewSong(lsNDR2, song);
-      lsNDR2 = song.title;
+      if (song) {
+        await createNewSong(lsNDR2, song);
+        lsNDR2 = song.title;
+      }
     });
   },
 
   njoy: () => {
     schedule.scheduleJob("*/30 */1 * * * *", async () => {
       const song = await getNjoySong();
-      await createNewSong(lsNJOY, song);
-      lsNJOY = song.title;
+      if (song) {
+        await createNewSong(lsNJOY, song);
+        lsNJOY = song.title;
+      }
     });
   },
 };
