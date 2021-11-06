@@ -22,7 +22,7 @@ let lsNDR2;
 //jobs
 exports.Jobs = {
     ndr2: () => __awaiter(void 0, void 0, void 0, function* () {
-        node_schedule_1.default.scheduleJob(" */2 * * * *", () => __awaiter(void 0, void 0, void 0, function* () {
+        node_schedule_1.default.scheduleJob("*/2 * * * *", () => __awaiter(void 0, void 0, void 0, function* () {
             const song = yield (0, Ndr2Scraper_1.getNdr2Song)();
             yield (0, create_1.createNewSong)(lsNDR2, song);
             lsNDR2 = song.title;
