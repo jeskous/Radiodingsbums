@@ -14,14 +14,20 @@ const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 function createNewSong(lastSong, song) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (lastSong !== song.title) {
-            yield prisma.song.create({
-                data: {
-                    interpret: song.interpret,
-                    title: song.title,
-                    channel: song.channel,
-                },
-            });
+        try {
+            if (lastSong !== song.title) {
+                yield prisma.song.create({
+                    data: {
+                        interpret: song.interpret,
+                        title: song.title,
+                        channel: song.channel,
+                    },
+                });
+            }
+        }
+        catch (err) {
+            console.log("createNewSong - Error");
+            console.log(err);
         }
     });
 }
