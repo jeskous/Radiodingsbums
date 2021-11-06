@@ -9,7 +9,7 @@ let lsNDR2: string;
 //jobs
 export const Jobs = {
   ndr2: async () => {
-    schedule.scheduleJob(" */2 * * * *", async () => {
+    schedule.scheduleJob("*/2 * * * *", async () => {
       const song = await getNdr2Song();
       await createNewSong(lsNDR2, song);
       lsNDR2 = song.title;

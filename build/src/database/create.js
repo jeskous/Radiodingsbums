@@ -20,6 +20,7 @@ function createNewSong(lastSong, song) {
                     interpret: song.interpret,
                     title: song.title,
                     channel: song.channel,
+                    createdAt: new Date().toLocaleString(),
                 },
             });
         }
