@@ -12,5 +12,5 @@ model Song {
   title       String   @db.VarChar(255)
   interpret   String   @db.VarChar(255)
   channel     String   @db.VarChar(255)
-  createdAt   DateTime @default(now()) 
+  createdAt   DateTime @default(now()) @db.Timestamp()
 }
