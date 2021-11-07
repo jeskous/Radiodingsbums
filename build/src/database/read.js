@@ -27,7 +27,11 @@ exports.getFirstRow = getFirstRow;
 function getLastSongTitle(channel) {
     return __awaiter(this, void 0, void 0, function* () {
         const songs = yield prisma.song.findMany({ where: { channel: channel } });
-        return songs.length > 0 ? songs[songs.length - 1].title : "";
+        console.log(songs);
+        if (songs.length > 0) {
+            return songs[songs.length - 1].title;
+        }
+        return "";
     });
 }
 exports.getLastSongTitle = getLastSongTitle;
