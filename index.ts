@@ -1,5 +1,7 @@
 import express from "express";
 import { testConnection } from "./prisma/database";
+import { deleteFirstEntry } from "./src/database/delete";
+import { getFirstRow, getTotalRowCount } from "./src/database/read";
 import { Jobs } from "./src/scheduledJobs/jobs";
 const cors = require("cors");
 

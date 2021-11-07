@@ -9,27 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createNewSong = void 0;
+exports.deleteFirstEntry = void 0;
 const client_1 = require("@prisma/client");
-const delete_1 = require("./delete");
 const read_1 = require("./read");
 const prisma = new client_1.PrismaClient();
-function createNewSong(lastSong, song) {
+function deleteFirstEntry() {
     return __awaiter(this, void 0, void 0, function* () {
-        if (lastSong !== song.title) {
-            if ((yield (0, read_1.getTotalRowCount)()) === 10000) {
-                console.log("deleting first entry...");
-                yield (0, delete_1.deleteFirstEntry)();
-            }
-            console.log("writing new song to db...");
-            yield prisma.song.create({
-                data: {
-                    interpret: song.interpret,
-                    title: song.title,
-                    channel: song.channel,
-                },
-            });
-        }
+        const song = yield (0, read_1.getFirstRow)();
+        yield prisma.song.delete({ where: { id: song.id } });
     });
 }
-exports.createNewSong = createNewSong;
+exports.deleteFirstEntry = deleteFirstEntry;
