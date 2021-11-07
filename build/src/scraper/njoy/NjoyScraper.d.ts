@@ -1,2 +1,2 @@
 import CurrentSong from "../../interfaces/CurrentSong";
-export declare function getNjoySong(): Promise<CurrentSong | undefined>;
+export declare function getNjoySong(): Promise<CurrentSong>;

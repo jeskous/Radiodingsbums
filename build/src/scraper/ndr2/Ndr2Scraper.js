@@ -17,32 +17,28 @@ const puppeteer_1 = __importDefault(require("puppeteer"));
 const url = "https://www.ndr.de/ndr2/index.html";
 function getNdr2Song() {
     return __awaiter(this, void 0, void 0, function* () {
-        try {
-            console.log("launcing browser...");
-            const browser = yield puppeteer_1.default.launch({
-                args: ["--no-sandbox", "--disable-setuid-sandbox"],
-            });
-            console.log("opening new Page...");
-            const page = yield browser.newPage();
-            console.log("going to url...");
-            yield page.goto(url);
-            console.log("getting element...");
-            const title = yield page.$eval("#titleNow", (el) => el.innerHTML);
-            const interpret = yield page.$eval("#interpretNow", (el) => el.innerHTML);
-            console.log("creating object...");
-            const song = {
-                title: title,
-                interpret: interpret,
-                channel: "NDR2",
-            };
-            console.log("returning new Song!");
-            console.log(song);
-            return song;
-        }
-        catch (err) {
-            console.log("getNdr2Song - ERROR");
-            console.log(err);
-        }
+        console.log("launcing browser...");
+        const browser = yield puppeteer_1.default.launch({
+            args: ["--no-sandbox", "--disable-setuid-sandbox"],
+        });
+        console.log("opening new Page...");
+        const page = yield browser.newPage();
+        console.log("going to url...");
+        yield page.goto(url);
+        console.log("getting element...");
+        const title = yield page.$eval("#titleNow", (el) => el.innerHTML);
+        const interpret = yield page.$eval("#interpretNow", (el) => el.innerHTML);
+        console.log("creating object...");
+        const song = {
+            title: title,
+            interpret: interpret,
+            channel: "NDR2",
+        };
+        console.log("returning new Song!");
+        console.log(song);
+        console.log("closing browser...");
+        browser.close();
+        return song;
     });
 }
 exports.getNdr2Song = getNdr2Song;
