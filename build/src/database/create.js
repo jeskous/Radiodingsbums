@@ -16,7 +16,7 @@ const read_1 = require("./read");
 const prisma = new client_1.PrismaClient();
 function createNewSong(lastSong, song) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (lastSong !== song.title) {
+        if (lastSong !== song.title && lastSong !== "") {
             if ((yield (0, read_1.getTotalRowCount)()) === 10000) {
                 console.log("deleting first entry...");
                 yield (0, delete_1.deleteFirstEntry)();
