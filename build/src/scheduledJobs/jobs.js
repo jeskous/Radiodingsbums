@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Jobs = void 0;
 const node_schedule_1 = __importDefault(require("node-schedule"));
 const create_1 = require("../database/create");
+const axios_1 = __importDefault(require("axios"));
 const Ndr2Scraper_1 = require("../scraper/ndr2/Ndr2Scraper");
 const NjoyScraper_1 = require("../scraper/njoy/NjoyScraper");
 let lsNJOY;
@@ -38,5 +39,10 @@ exports.Jobs = {
                 lsNJOY = song.title;
             }
         }));
+    },
+    preventIdle: () => {
+        node_schedule_1.default.scheduleJob("*/20 * * * *", () => {
+            axios_1.default.get("https://radio-overview.herokuapp.com/");
+        });
     },
 };

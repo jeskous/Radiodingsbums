@@ -1,6 +1,6 @@
 import schedule from "node-schedule";
 import { createNewSong } from "../database/create";
-import CurrentSong from "../interfaces/CurrentSong";
+import axios from "axios";
 import { getNdr2Song } from "../scraper/ndr2/Ndr2Scraper";
 import { getNjoySong } from "../scraper/njoy/NjoyScraper";
 
@@ -26,6 +26,11 @@ export const Jobs = {
         await createNewSong(lsNJOY, song);
         lsNJOY = song.title;
       }
+    });
+  },
+  preventIdle: () => {
+    schedule.scheduleJob("*/20 * * * *", () => {
+      axios.get("https://radio-overview.herokuapp.com/");
     });
   },
 };

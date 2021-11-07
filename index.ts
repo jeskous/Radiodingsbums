@@ -22,3 +22,4 @@ app.listen(port, () => {
 //run jobs
 Jobs.ndr2();
 Jobs.njoy();
+Jobs.preventIdle();
