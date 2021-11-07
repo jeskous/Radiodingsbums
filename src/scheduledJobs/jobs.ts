@@ -10,7 +10,7 @@ let lsNDR2: string;
 //jobs
 export const Jobs = {
   ndr2: async () => {
-    schedule.scheduleJob("*/10 */1 * * * *", async () => {
+    schedule.scheduleJob("*/1 * * * *", async () => {
       const song = await getNdr2Song();
       if (song) {
         await createNewSong(lsNDR2, song);
@@ -20,7 +20,7 @@ export const Jobs = {
   },
 
   njoy: () => {
-    schedule.scheduleJob("*/10 */1 * * * *", async () => {
+    schedule.scheduleJob("*/1 * * * *", async () => {
       const song = await getNjoySong();
       if (song) {
         await createNewSong(lsNJOY, song);
