@@ -18,16 +18,14 @@ const create_1 = require("../database/create");
 const axios_1 = __importDefault(require("axios"));
 const Ndr2Scraper_1 = require("../scraper/ndr2/Ndr2Scraper");
 const NjoyScraper_1 = require("../scraper/njoy/NjoyScraper");
-let lsNJOY;
-let lsNDR2;
+const strings_1 = __importDefault(require("../config/strings"));
 //jobs
 exports.Jobs = {
     ndr2: () => __awaiter(void 0, void 0, void 0, function* () {
         node_schedule_1.default.scheduleJob("*/1 * * * *", () => __awaiter(void 0, void 0, void 0, function* () {
             const song = yield (0, Ndr2Scraper_1.getNdr2Song)();
             if (song) {
-                yield (0, create_1.createNewSong)(lsNDR2, song);
-                lsNDR2 = song.title;
+                yield (0, create_1.createNewSong)(strings_1.default.Chanel.NDR2, song);
             }
         }));
     }),
@@ -35,8 +33,7 @@ exports.Jobs = {
         node_schedule_1.default.scheduleJob("*/1 * * * *", () => __awaiter(void 0, void 0, void 0, function* () {
             const song = yield (0, NjoyScraper_1.getNjoySong)();
             if (song) {
-                yield (0, create_1.createNewSong)(lsNJOY, song);
-                lsNJOY = song.title;
+                yield (0, create_1.createNewSong)(strings_1.default.Chanel.NJOY, song);
             }
         }));
     },

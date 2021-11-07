@@ -3,9 +3,7 @@ import { createNewSong } from "../database/create";
 import axios from "axios";
 import { getNdr2Song } from "../scraper/ndr2/Ndr2Scraper";
 import { getNjoySong } from "../scraper/njoy/NjoyScraper";
-
-let lsNJOY: string;
-let lsNDR2: string;
+import strings from "../config/strings";
 
 //jobs
 export const Jobs = {
@@ -13,8 +11,7 @@ export const Jobs = {
     schedule.scheduleJob("*/1 * * * *", async () => {
       const song = await getNdr2Song();
       if (song) {
-        await createNewSong(lsNDR2, song);
-        lsNDR2 = song.title;
+        await createNewSong(strings.Chanel.NDR2, song);
       }
     });
   },
@@ -23,8 +20,7 @@ export const Jobs = {
     schedule.scheduleJob("*/1 * * * *", async () => {
       const song = await getNjoySong();
       if (song) {
-        await createNewSong(lsNJOY, song);
-        lsNJOY = song.title;
+        await createNewSong(strings.Chanel.NJOY, song);
       }
     });
   },

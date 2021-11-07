@@ -9,3 +9,8 @@ export async function getTotalRowCount() {
 export async function getFirstRow() {
   return await prisma.song.findFirst();
 }
+
+export async function getLastSongTitle(channel: string) {
+  const songs = await prisma.song.findMany({ where: { channel: channel } });
+  return songs[songs.length - 1].title;
+}

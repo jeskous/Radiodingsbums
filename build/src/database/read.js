@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getFirstRow = exports.getTotalRowCount = void 0;
+exports.getLastSongTitle = exports.getFirstRow = exports.getTotalRowCount = void 0;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 function getTotalRowCount() {
@@ -24,3 +24,10 @@ function getFirstRow() {
     });
 }
 exports.getFirstRow = getFirstRow;
+function getLastSongTitle(channel) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const songs = yield prisma.song.findMany({ where: { channel: channel } });
+        return songs[songs.length - 1].title;
+    });
+}
+exports.getLastSongTitle = getLastSongTitle;
