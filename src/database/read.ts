@@ -12,7 +12,6 @@ export async function getFirstRow() {
 
 export async function getLastSongTitle(channel: string) {
   const songs = await prisma.song.findMany({ where: { channel: channel } });
-  console.log(songs);
   if (songs.length > 0) {
     return songs[songs.length - 1].title;
   }
