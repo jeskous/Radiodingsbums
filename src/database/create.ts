@@ -5,7 +5,8 @@ import { getLastSongTitle, getTotalRowCount } from "./read";
 const prisma = new PrismaClient();
 
 export async function createNewSong(chanel: string, song: CurrentSong) {
-  if ((await getLastSongTitle(chanel)) !== song.title) {
+  const lastSong = await getLastSongTitle(chanel);
+  if (lastSong !== song.title && lastSong !== "") {
     if ((await getTotalRowCount()) === 10000) {
       console.log("deleting first entry...");
       await deleteFirstEntry();
