@@ -16,19 +16,22 @@ const read_1 = require("./read");
 const prisma = new client_1.PrismaClient();
 function createNewSong(chanel, song) {
     return __awaiter(this, void 0, void 0, function* () {
-        if ((yield (0, read_1.getLastSongTitle)(chanel)) !== song.title) {
-            if ((yield (0, read_1.getTotalRowCount)()) === 10000) {
-                console.log("deleting first entry...");
-                yield (0, delete_1.deleteFirstEntry)();
+        const lastSong = yield (0, read_1.getLastSongTitle)(chanel);
+        if (lastSong !== song.title) {
+            if (song.title != "") {
+                if ((yield (0, read_1.getTotalRowCount)()) === 10000) {
+                    console.log("deleting first entry...");
+                    yield (0, delete_1.deleteFirstEntry)();
+                }
+                console.log("writing new song to db...");
+                yield prisma.song.create({
+                    data: {
+                        interpret: song.interpret,
+                        title: song.title,
+                        channel: song.channel,
+                    },
+                });
             }
-            console.log("writing new song to db...");
-            yield prisma.song.create({
-                data: {
-                    interpret: song.interpret,
-                    title: song.title,
-                    channel: song.channel,
-                },
-            });
         }
     });
 }
