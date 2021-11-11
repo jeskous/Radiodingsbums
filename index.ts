@@ -1,7 +1,7 @@
 import express from "express";
 import { testConnection } from "./prisma/database";
-import { deleteFirstEntry } from "./src/database/delete";
-import { getFirstRow, getTotalRowCount } from "./src/database/read";
+import getRouter from "./src/routes/Get";
+
 import { Jobs } from "./src/scheduledJobs/jobs";
 const cors = require("cors");
 
@@ -11,6 +11,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+//routes
+app.use("/api", getRouter);
+
 //Server
 const port = process.env.PORT || "4000";
 app.listen(port, () => {
@@ -19,7 +22,7 @@ app.listen(port, () => {
   console.log("Server running on port: " + port);
 });
 
-//run jobs
+//run jobsç
 Jobs.ndr2();
 Jobs.njoy();
 Jobs.preventIdle();
