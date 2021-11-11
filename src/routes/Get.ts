@@ -10,6 +10,7 @@ getRouter.get("/", (req: express.Request, res: express.Response) => {
 });
 
 //get song by chanel
+//example request: /chanel?name=ndr2
 getRouter.get(
   "/chanel",
   async (req: express.Request, res: express.Response) => {
@@ -28,4 +29,5 @@ getRouter.get(
     res.json({ msg: "success", data: { amount: songs.length, songs } });
   }
 );
+
 export default getRouter;
